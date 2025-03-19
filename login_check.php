@@ -1,4 +1,6 @@
 <?php
+//loging_check.php
+//isset fucnion que compruba si esta ininicializado
 if (!isset($POST["username"] || !isset($_POST["password"])){
 	echo "Error 1: Formulario no enviado";
 	exit();
@@ -57,11 +59,17 @@ if(!$resultado){
 
 }
 
+require_once("db_conf.php");
+$conn = mysqli_connect($db_server,$db_pass, $db_db_db);
+$resultado = mysqli_query($conn, $query);
+
+
 $num_rows = mysqli_num_rows($resultado);
 if ($num_rows == 0){
 	echo "Error 5: Usuario o password incorrecto "
 	exit();
 }
+
 if ($num_rows != 1){
 	echo "Error 6: Usuario o password incorrecto "
 	exit();

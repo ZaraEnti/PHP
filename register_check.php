@@ -136,6 +136,11 @@ $conn = mysqli_connect("localhost", "admin", "enti", "entihub");
 
 $resultado = mysqli_query($conn, $query);
 
+require_once("db_conf.php");
+$conn = mysqli_connect($db_server,$db_pass, $db_db_db);
+$resultado = mysqli_query($conn, $query);
+
+
 if (!$resultado) {
 	echo "Error 6a: Petición incorrecta"; 
 	exit;
@@ -151,5 +156,12 @@ $password = md5($password);
 
 echo "Registrado"
 //aqui iria el insert.
+
+
+
+
+
+
+
 ?>
 
