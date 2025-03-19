@@ -78,7 +78,7 @@ INNER JOIN
 ON
 	users.id_user=messages.id_user
 WHERE
-	users.status='1';
+	messages.status='1';
 ORDER BY
 	messages.post_time DESC
 EOD;
