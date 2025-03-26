@@ -1,6 +1,3 @@
-DROP TABLE IF EXISTS messages_multimedia;
-DROP TABLE IF EXISTS responses;
-DROP TABLE IF EXISTS multimedia;
 DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS users;
 
@@ -14,7 +11,7 @@ CREATE TABLE users (
 	status INT NOT NULL DEFAULT 1
 );
 INSERT INTO users (name, username, email, birthdate, password)
-VALUES ('Carles Barranco', 'carles', 'carles.barranco@enti.cat', '2004-10-21', md5('enti'));
+VALUES ('Zarai Zhang', 'zara', 'zara.zhang@enti.cat', '2000-12-01', md5('enti'));
 	
 CREATE TABLE messages (
 	id_message INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,

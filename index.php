@@ -1,6 +1,5 @@
-<?php
-
-//para mostrar los mensajes escritos que presenta en la base de datos
+<?php//index.php
+//Para mostrar los mensajes escritos que presenta en la base de datos
 function write_message ($message_info){
 	echo <<<EOD
 <section class="message">
@@ -10,23 +9,23 @@ function write_message ($message_info){
 </section>
 EOD;
 }
-//iniciar la sesión en todas las páginas pero no debemos poner esta función en el template
+
+//Iniciar la sesión en todas las páginas pero no debemos poner esta función de inicio de sesión en el template. Este solo tiene las funciones para comprovar
 session_start();
 
-//el modelo que hemos creado previamente open_html() close_html() para utilizarlos en nuestras paginas
+//El modelo que hemos creado previamente open_html() close_html() para utilizarlos en nuestras paginas
 require_once("template.php");
 
-//por defecto session es false
+//Por defecto session es false
 $session = false;
 
-
-//comprovación de que si esta inicializado la sessión
+//Comprovación de que si esta inicializado la sessión
 if (isset($_SESSION["id_user"])){
 	$session = true;
 }
 
 open_html();
-//informacion para el usuario
+//Informacion para el usuario de que la sesión esta cerrada
 if(isset ($_GET["logout"])){
 	$user_prev = addslashes($_GET["logout"]);
 	echo <<<EOD
@@ -34,7 +33,7 @@ if(isset ($_GET["logout"])){
 	EOD;
 }
 
-//session
+//Activa la session
 if ($session) {
 	echo <<<EOD
 <aside id="message_form">
@@ -54,13 +53,15 @@ else{
 EOD;
 
 }
+
+//Este es dondes esta los mensajes de la DB
 echo <<<EOD
 <section id="message-block">
 	<h2>Lo que dice la gente...</h2>
 
 EOD;
-// hay una separacion
 
+//Nos connectamos a la base de datos
 require_once("db_conf.php");
 $conn = mysqli_connect($db_server,$db_pass, $db_db);
 
@@ -83,8 +84,10 @@ ORDER BY
 	messages.post_time DESC
 EOD;
 
+//Ejecutar la consulta
 $resultado = mysqli_query($conn, $query);
 
+//ERROR al leer los mensajes
 if (!$resultado){
 	echo "Error al leer el feed de mensajes";
 	echo <<<EOD
@@ -98,6 +101,8 @@ while ($msg = $resultado->fetch_assoc()){
 	write_message($msg);
 }
 
+//Terminar la sesion de base de datos
+mysqli_close($conn);
 echo <<<EOD
 </section>
 EOD;
