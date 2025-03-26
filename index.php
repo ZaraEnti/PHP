@@ -1,5 +1,6 @@
 <?php//index.php
 //Para mostrar los mensajes escritos que presenta en la base de datos
+
 function write_message ($message_info){
 	echo <<<EOD
 <section class="message">
@@ -99,6 +100,10 @@ EOD;
 }
 while ($msg = $resultado->fetch_assoc()){
 	write_message($msg);
+	<<<EOD
+	<button name="delete" onclick="location.href='delete.php'">Eliminar</button>
+	<button name="report" onclick="location.href='delete.php'">Denunciar</button>
+EOD;
 }
 
 //Terminar la sesion de base de datos
